@@ -126,20 +126,20 @@ wget https://raw.githubusercontent.com/alaelson/fnrc_bsi_2026.2/main/projeto-fin
 ### 9. Usuários
 
 - Cada VM tem o usuário **`administrador`** e **um usuário para cada integrante** do grupo.
-- O nome de usuário segue o formato `nome.sobrenome`, em minúsculas, sem acentos e sem espaços (ex.: `marlos.silva`).
+- O nome de usuário segue o formato `nome.sobrenome`, em minúsculas, sem acentos e sem espaços (ex.: `fulano.silva`).
 - O conjunto de usuários é **o mesmo nas 8 VMs**.
 - Cada usuário tem diretório em `/home/<usuário>` e shell `/bin/bash`.
 
 Exemplo para o Grupo 0, executado em cada VM (ver [Roteiro 03](../material-consulta/03-arquivos-e-automacao-de-usuarios.md)):
 
 ```bash
-for u in marlos.silva victor.lima nicolas.costa yury.araujo; do
+for u in fulano.silva beltrano.souza cicrano.santos deltrano.lima; do
   sudo useradd -m -s /bin/bash "$u"
   sudo passwd "$u"
 done
 
 # Verificação
-getent passwd marlos.silva victor.lima nicolas.costa yury.araujo
+getent passwd fulano.silva beltrano.souza cicrano.santos deltrano.lima
 ls -l /home
 ```
 
@@ -222,7 +222,7 @@ Registre no repositório do grupo os comandos e as saídas de:
    ```
 2. Acesso `ssh` entre VMs de **PCs diferentes**, com o usuário de cada integrante (ver [Roteiro 04](../material-consulta/04-ssh-e-diagnostico-de-rede.md)):
    ```bash
-   ssh marlos.silva@g0-pc3-vm2
+   ssh fulano.silva@g0-pc3-vm2
    hostname     # já dentro da sessão remota
    w            # mostra a sessão aberta e o IP de origem
    exit
