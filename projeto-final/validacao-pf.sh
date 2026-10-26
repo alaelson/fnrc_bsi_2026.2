@@ -17,7 +17,7 @@
 # ============================ CONFIGURAÇÃO DO GRUPO ===========================
 GRUPO=0                       # número do grupo (0 = grupo modelo)
 TURMA="bsi-26-2"
-USUARIOS=( "fulano.silva" "beltrano.souza" "cicrano.santos" "deltrano.lima" )
+USUARIOS=( "fulano.tal" "fulustreca.grudes" "beltrano.silva" "cicrano.souza" )
 ADMIN="administrador"
 IFACE="enp0s3"
 # ==============================================================================
