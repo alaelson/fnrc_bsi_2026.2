@@ -9,14 +9,14 @@ Aqui ficam as definições do **Projeto Final** e o **material de consulta** de 
 ## 💻 Informações Gerais do Laboratório
 
 *   **Hipervisor:** [VirtualBox](https://www.virtualbox.org/) (com o respetivo *Extension Pack* instalado no hospedeiro).
-*   **Sistema Operacional Guest:** Ubuntu Server 26.04 LTS (64-bit).
-*   **Hardware Padrão da VM:** 512 MB de Memória RAM, 1 CPU Virtual e 32 GB de Disco Rígido (VDI, Alocação Dinâmica).
+*   **Sistema Operacional Guest:** Ubuntu Server 22.04 LTS (64-bit), mais leve para rodar com 512 MB de RAM. Download: [ubuntu-22.04.5-live-server-amd64.iso](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-live-server-amd64.iso).
+*   **Hardware Padrão da VM:** 1 CPU Virtual e 32 GB de Disco Rígido (VDI, Alocação Dinâmica). Memória RAM de 1,5 GB (1536 MB) para instalar o sistema, reduzida para 512 MB depois da instalação.
 *   **Usuário Administrativo Padrão:** `administrador`.
 *   **Senha de Laboratório:** `adminifal`.
 
 ### 📁 Estrutura de Diretórios no Host (Windows do Laboratório)
-*   **Diretório de ISOs originais:** `C:\2026\BSI\VM\original`.
-*   **Diretório de Trabalho do Aluno:** `C:\2026\BSI\VM\<NomeDoAluno>`.
+*   **Diretório de ISOs originais:** `C:\2026.2\BSI\VM\original`.
+*   **Diretório de Trabalho do Aluno:** `C:\2026.2\BSI\VM\<NomeDoAluno>`.
 *   **Servidor de Arquivos da Rede (Acesso a ISO/VM):** `\\172.20.20.21\public` (Usuário: `alunoifal` | Senha: `alunoifal`)
 
 ---
@@ -32,7 +32,7 @@ Aqui ficam as definições do **Projeto Final** e o **material de consulta** de 
 Os roteiros abaixo trazem as explicações, os comandos e os testes de cada habilidade usada no projeto final.
 
 1.  **[Roteiro 01: Instalação e Configuração Básica do Ubuntu Server](material-consulta/01-instalacao-ubuntu-server.md)**
-    *   Criação de VM no VirtualBox.
+    *   Download do Ubuntu Server 22.04 LTS e criação de VM no VirtualBox (1,5 GB de RAM para instalar, 512 MB depois).
     *   Particionamento avançado de disco usando LVM: `/` (29 GB), `/boot` (1 GB) e `SWAP` (2 GB).
     *   Instalação com o OpenSSH Server e primeira atualização de repositórios (`apt-get update`).
 2.  **[Roteiro 02: Administração de Usuários, Grupos e Permissões](material-consulta/02-usuarios-grupos-permissoes.md)**
@@ -55,6 +55,16 @@ Os roteiros abaixo trazem as explicações, os comandos e os testes de cada habi
     *   Hostname curto, domínio e FQDN.
     *   Alteração do nome da máquina com `hostnamectl`.
     *   Resolução local de nomes com `/etc/hosts` e testes com `getent hosts`, `ping` e `ssh`.
+
+---
+
+## 🎥 Vídeos de Apoio
+
+Vídeos do canal do professor com operações com máquinas virtuais no VirtualBox:
+
+*   [Vídeo 1 — operações com VMs no VirtualBox](https://youtu.be/z7BRXpNnCgA)
+*   [Vídeo 2 — operações com VMs no VirtualBox](https://youtu.be/r0rZ58JTll0)
+*   [Vídeo 3 — operações com VMs no VirtualBox](https://youtu.be/Js6yI43LvPU)
 
 ---
 

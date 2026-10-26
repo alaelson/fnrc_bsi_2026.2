@@ -134,7 +134,7 @@ network:
     ```bash
     administrador@ubuntu_server:~$ ip addr show enp0s3
     ```
-    *(Você também pode utilizar o comando `sudo netplan status` para conferir os detalhes da interface e rotas ativas).*
+    *(Você também pode utilizar o comando `sudo netplan status`, se disponível na sua versão do Netplan, ou `ip route` para conferir a interface e as rotas ativas).*
 
 ---
 

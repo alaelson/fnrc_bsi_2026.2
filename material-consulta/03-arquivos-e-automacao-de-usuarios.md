@@ -1,6 +1,6 @@
 # Roteiro 03: Manipulação, Edição, Permissões e Automação de Arquivos no Linux
 
-Neste roteiro, você verá como manipular, visualizar e editar arquivos diretamente através do terminal do Ubuntu Server 26.04 LTS. Além disso, daremos os primeiros passos em automação de tarefas administrativas criando scripts em Shell para criação e gerenciamento de contas de usuários em lote.
+Neste roteiro, você verá como manipular, visualizar e editar arquivos diretamente através do terminal do Ubuntu Server 22.04 LTS. Além disso, daremos os primeiros passos em automação de tarefas administrativas criando scripts em Shell para criação e gerenciamento de contas de usuários em lote.
 
 ---
 

@@ -100,9 +100,11 @@ Siga as etapas nesta ordem. As etapas 2 a 4 são feitas com a placa da VM ainda 
 
 ### 8. Criação das VMs
 
-Siga o [Roteiro 01](../material-consulta/01-instalacao-ubuntu-server.md), com estes ajustes:
+Siga o [Roteiro 01](../material-consulta/01-instalacao-ubuntu-server.md) e os [vídeos de apoio](../README.md#-vídeos-de-apoio) sobre VMs no VirtualBox, com estes ajustes:
 
-- **Hardware de cada VM:** 512 MB de RAM, 1 CPU e disco de 32 GB (VDI, alocação dinâmica).
+- **Sistema:** Ubuntu Server 22.04 LTS ([ubuntu-22.04.5-live-server-amd64.iso](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-live-server-amd64.iso)), mais leve para rodar com pouca memória.
+- **Hardware de cada VM:** 1 CPU e disco de 32 GB (VDI, alocação dinâmica). Crie a VM com **1,5 GB (1536 MB) de RAM** para instalar o sistema e, depois da instalação e da primeira atualização, reduza para **512 MB** (Roteiro 01, seção 5.1). Com 512 MB, as 2 VMs de cada PC rodam juntas sem pesar no computador.
+- **Pastas no PC (Windows):** ISO em `C:\2026.2\BSI\VM\original` e VMs em `C:\2026.2\BSI\VM\<NomeDoAluno>`.
 - **Nome da VM no VirtualBox** e **Your server's name** no instalador: o hostname curto da VM (ex.: `g0-pc1-vm1`).
 - **Usuário administrador:** `administrador`, com a senha padrão do laboratório.
 - Marque **Install OpenSSH Server** durante a instalação.

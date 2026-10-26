@@ -1,7 +1,7 @@
 # Roteiro 02: Administração de Usuários, Grupos e Permissões no Linux
 
 ## 1. Objetivos
-O objetivo deste roteiro é capacitar você a administrar usuários, grupos e permissões de acesso a arquivos e diretórios no Ubuntu Server 26.04 LTS. Ao final deste roteiro, você será capaz de:
+O objetivo deste roteiro é capacitar você a administrar usuários, grupos e permissões de acesso a arquivos e diretórios no Ubuntu Server 22.04 LTS. Ao final deste roteiro, você será capaz de:
 * Criar e gerenciar usuários e senhas via terminal.
 * Organizar usuários em grupos de trabalho.
 * Compreender e manipular permissões de leitura, escrita e execução usando a notação simbólica e a notação octal (numérica).

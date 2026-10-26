@@ -33,6 +33,7 @@ No Ubuntu Server moderno, o utilitário `netplan` gerencia as configurações de
 ```bash
 administrador@ubuntu_server:~$ netplan status
 ```
+*(Se a versão do Netplan instalada não tiver o subcomando `status`, use `ip addr show enp0s3` e `cat /etc/netplan/*.yaml`.)*
 
 Observe que a interface `enp0s3` estará listada com o modo DHCP ativo e o endereço IP dinâmico atribuído pelo VirtualBox (`10.0.2.15/24`).
 
