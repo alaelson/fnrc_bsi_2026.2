@@ -368,7 +368,7 @@ sudo nano /etc/hosts
 **Passo 3.** Apague o `machine-id` herdado da VM base. O hostname é o nome **para as pessoas**; o `machine-id` é o identificador **interno** da instalação, e trocar um não muda o outro. Toda VM importada ou clonada da mesma base fica com o mesmo `machine-id`, e o Ubuntu Server usa esse valor, por exemplo, como identificador de cliente DHCP: duas VMs com o mesmo `machine-id`, na mesma rede e usando DHCP, podem receber **o mesmo IP**.
 
 ```bash
-sudo rm -f /etc/machine-id
+sudo rm -f /etc/machine-id /var/lib/dbus/machine-id
 ```
 
 **Passo 4.** Gere um `machine-id` novo e único:
