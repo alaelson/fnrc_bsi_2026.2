@@ -52,6 +52,44 @@ g0-pc1-vm1.grupo0.bsi-26-2.maceio.lab
 
 O prompt do terminal só mostra o novo nome depois de sair e entrar novamente (`exit` e novo login).
 
+### 3.1 Nome da máquina × identificador da máquina (`machine-id`)
+
+O **hostname** é o nome da máquina **para as pessoas**: aparece no prompt, nos logs e é usado para encontrar a máquina na rede. Além dele, cada instalação do Linux tem um **identificador interno**, o **`machine-id`**: um número hexadecimal de 32 caracteres, gravado no arquivo `/etc/machine-id` e criado automaticamente no primeiro boot do sistema. Ele também aparece na saída do `hostnamectl`, na linha `Machine ID`.
+
+Os dois são **independentes**: trocar o hostname **não** muda o `machine-id`.
+
+**Por que isso importa?** Quando uma VM é **clonada** no VirtualBox, ou importada de um mesmo arquivo `.ova`, a cópia herda o `machine-id` da original, mesmo recebendo um nome e um endereço MAC novos. O Ubuntu Server usa esse identificador, por exemplo, para montar o **identificador de cliente DHCP**: duas VMs clonadas, na mesma rede e usando DHCP, podem receber **o mesmo endereço IP**, porque o servidor DHCP enxerga as duas como a mesma máquina.
+
+Veja o `machine-id` em cada VM:
+
+```bash
+administrador@g0-pc1-vm1:~$ cat /etc/machine-id
+```
+
+Se duas VMs do grupo tiverem valores **iguais**, uma delas foi clonada da outra. Gere um identificador novo **somente na VM clonada** (no exemplo, a `g0-pc1-vm2`):
+
+**Passo 1.** Apague o identificador herdado:
+
+```bash
+administrador@g0-pc1-vm2:~$ sudo rm -f /etc/machine-id
+```
+
+**Passo 2.** Gere um identificador novo e único. O `systemd-machine-id-setup` é a ferramenta do `systemd` que cria o `/etc/machine-id` quando ele não existe:
+
+```bash
+administrador@g0-pc1-vm2:~$ sudo systemd-machine-id-setup
+```
+
+**Passo 3.** Reinicie a VM para que todos os serviços passem a usar o novo identificador:
+
+```bash
+administrador@g0-pc1-vm2:~$ sudo reboot
+```
+
+Depois do boot, rode `cat /etc/machine-id` de novo e confira que agora os valores são diferentes.
+
+> Se as VMs foram instaladas do zero, uma a uma, os identificadores já são diferentes e não é preciso fazer nada.
+
 ---
 
 ## 4. Mapeando Nomes no Arquivo `/etc/hosts`
@@ -117,7 +155,17 @@ Se `getent hosts` não retornar nada, revise a grafia do nome no `/etc/hosts`. S
 *   **`hostname` / `hostname -s`:** mostram o nome atual completo e o nome curto.
 *   **`/etc/hosts`:** arquivo de mapeamento estático entre endereços IP e nomes.
 *   **`getent hosts <nome>`:** consulta a tradução de um nome usando a mesma ordem de busca do sistema (`/etc/hosts` e depois DNS).
+*   **`/etc/machine-id`:** arquivo com o identificador interno e único da instalação, independente do hostname.
+*   **`systemd-machine-id-setup`:** gera um `machine-id` novo quando o arquivo não existe (usado em VMs clonadas).
 
 ---
 
 > **No projeto final:** cada VM recebe o FQDN definido no planejamento do grupo, e o `/etc/hosts` de **todas as 8 VMs** contém as 8 máquinas do grupo (veja o [README do projeto](../projeto-final/README.md)).
+
+---
+
+## Referências
+
+* FREEDESKTOP.ORG. **machine-id(5)**: identificador local da máquina. Disponível em: <https://www.freedesktop.org/software/systemd/man/latest/machine-id.html>.
+* FREEDESKTOP.ORG. **systemd-machine-id-setup(1)**. Disponível em: <https://www.freedesktop.org/software/systemd/man/latest/systemd-machine-id-setup.html>.
+* FREEDESKTOP.ORG. **systemd.network(5)**, opção `ClientIdentifier=` da seção `[DHCPv4]`. Disponível em: <https://www.freedesktop.org/software/systemd/man/latest/systemd.network.html>.

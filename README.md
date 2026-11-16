@@ -25,6 +25,8 @@ Aqui ficam as definições do **Projeto Final** e o **material de consulta** de 
 
 *   **[Projeto Final — Rede virtualizada com 8 VMs](projeto-final/README.md)**: Cada grupo monta uma rede com 8 VMs Ubuntu Server distribuídas em 4 PCs do laboratório, todas em modo Placa em Ponte. O Grupo X usa a sub-rede `192.168.26.(16 × X)/28`, com IP estático em todas as VMs, hostnames e FQDN no domínio `grupoX.bsi-26-2.maceio.lab`, `/etc/hosts` e os usuários dos integrantes em todas as máquinas. A entrega é feita no repositório do grupo, `fnrc-2026.2-bsi-pf-grupoX`, com as evidências dos testes de `ping`, `ssh` e do script de validação.
 
+> 💡 **Dica para o Projeto — [Roteiro 07: VM base enxuta](material-consulta/07-reduzir-e-clonar-vms.md).** Em vez de instalar o Ubuntu 8 vezes, prepare e reduza **uma única VM base** (já com os usuários e pacotes do projeto), exporte um `.ova` de cerca de 1 GB, importe nos outros PCs do grupo e crie a segunda VM de cada PC como **clone vinculado**. O roteiro também mostra como dar identidade própria a cada VM (hostname, `machine-id` e chaves SSH).
+
 ---
 
 ## 📚 Material de Consulta
@@ -55,6 +57,11 @@ Os roteiros abaixo trazem as explicações, os comandos e os testes de cada habi
     *   Hostname curto, domínio e FQDN.
     *   Alteração do nome da máquina com `hostnamectl`.
     *   Resolução local de nomes com `/etc/hosts` e testes com `getent hosts`, `ping` e `ssh`.
+    *   Identificador interno da máquina (`machine-id`) e o que fazer em VMs clonadas.
+7.  **[Roteiro 07: VM Base Enxuta — Reduzir, Exportar e Clonar as VMs](material-consulta/07-reduzir-e-clonar-vms.md)**
+    *   Limpeza da VM (cache, kernels antigos, firmware) e preenchimento do espaço livre com zeros.
+    *   Compactação do disco com `VBoxManage` e exportação de um `.ova` pequeno.
+    *   Importação nos outros PCs, clone vinculado e identidade própria de cada VM.
 
 ---
 
