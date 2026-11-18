@@ -68,10 +68,10 @@ administrador@g0-pc1-vm1:~$ cat /etc/machine-id
 
 Se duas VMs do grupo tiverem valores **iguais**, uma delas foi clonada da outra. Gere um identificador novo **somente na VM clonada** (no exemplo, a `g0-pc1-vm2`):
 
-**Passo 1.** Apague o identificador herdado:
+**Passo 1.** Apague o identificador herdado e também a cópia dele usada pelo D-Bus (`/var/lib/dbus/machine-id`). Se essa cópia for um arquivo comum, e não um link, o `systemd-machine-id-setup` do passo 2 copia o ID antigo de volta a partir dela:
 
 ```bash
-administrador@g0-pc1-vm2:~$ sudo rm -f /etc/machine-id
+administrador@g0-pc1-vm2:~$ sudo rm -f /etc/machine-id /var/lib/dbus/machine-id
 ```
 
 **Passo 2.** Gere um identificador novo e único. O `systemd-machine-id-setup` é a ferramenta do `systemd` que cria o `/etc/machine-id` quando ele não existe:
@@ -80,7 +80,12 @@ administrador@g0-pc1-vm2:~$ sudo rm -f /etc/machine-id
 administrador@g0-pc1-vm2:~$ sudo systemd-machine-id-setup
 ```
 
-**Passo 3.** Reinicie a VM para que todos os serviços passem a usar o novo identificador:
+**Passo 3.** Recrie a cópia do D-Bus como um link para o arquivo novo, para os dois ficarem sempre iguais:
+
+```bash
+administrador@g0-pc1-vm2:~$ sudo ln -sf /etc/machine-id /var/lib/dbus/machine-id
+```
+**Passo 4.** Reinicie a VM para que todos os serviços passem a usar o novo identificador:
 
 ```bash
 administrador@g0-pc1-vm2:~$ sudo reboot
@@ -156,7 +161,7 @@ Se `getent hosts` não retornar nada, revise a grafia do nome no `/etc/hosts`. S
 *   **`/etc/hosts`:** arquivo de mapeamento estático entre endereços IP e nomes.
 *   **`getent hosts <nome>`:** consulta a tradução de um nome usando a mesma ordem de busca do sistema (`/etc/hosts` e depois DNS).
 *   **`/etc/machine-id`:** arquivo com o identificador interno e único da instalação, independente do hostname.
-*   **`systemd-machine-id-setup`:** gera um `machine-id` novo quando o arquivo não existe (usado em VMs clonadas).
+*   **`systemd-machine-id-setup`:** gera um `machine-id` novo quando o arquivo não existe (usado em VMs clonadas). Se existir o `/var/lib/dbus/machine-id`, ele copia o ID desse arquivo; por isso, numa VM clonada, os dois são apagados antes.
 
 ---
 
