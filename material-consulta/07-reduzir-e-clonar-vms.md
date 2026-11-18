@@ -385,6 +385,8 @@ O **clone vinculado** guarda só as diferenças em relação à VM original e oc
 3. Em **Política de endereço MAC**, escolha **Gerar novos endereços MAC para todas as placas de rede**.
 4. Em **Tipo de clone**, escolha **Clone vinculado**.
 
+> **No PC onde a base foi preparada**, repita a clonagem para criar **todas** as VMs desse PC a partir da `ubuntu-base`: a primeira e a segunda (por exemplo `g0-pc1-vm1` e `g0-pc1-vm2`). Nos outros PCs, a primeira VM é a importada, e só a segunda é clone.
+
 > ⚠️ Clones vinculados **dependem** da VM original e do snapshot dela. **Não apague nem mova** a VM original enquanto o clone existir.
 
 ### 7.4 Dar identidade própria a cada VM
@@ -405,6 +407,8 @@ sudo nano /etc/hosts
 
 **Passo 3.** Apague o `machine-id` herdado da VM base. O hostname é o nome **para as pessoas**; o `machine-id` é o identificador **interno** da instalação, e trocar um não muda o outro. Toda VM importada ou clonada da mesma base fica com o mesmo `machine-id`, e o Ubuntu Server usa esse valor, por exemplo, como identificador de cliente DHCP: duas VMs com o mesmo `machine-id`, na mesma rede e usando DHCP, podem receber **o mesmo IP**.
 
+Apague também a cópia do D-Bus (`/var/lib/dbus/machine-id`). Se ela for um arquivo comum, e não um link, o `systemd-machine-id-setup` do passo 4 copia o ID antigo de volta a partir dela:
+
 ```bash
 sudo rm -f /etc/machine-id /var/lib/dbus/machine-id
 ```
@@ -415,13 +419,19 @@ sudo rm -f /etc/machine-id /var/lib/dbus/machine-id
 sudo systemd-machine-id-setup
 ```
 
-**Passo 5.** Apague as chaves de host SSH herdadas da VM base:
+**Passo 5.** Recrie a cópia do D-Bus como um link para o arquivo novo, para os dois ficarem sempre iguais:
+
+```bash
+sudo ln -sf /etc/machine-id /var/lib/dbus/machine-id
+```
+
+**Passo 6.** Apague as chaves de host SSH herdadas da VM base:
 
 ```bash
 sudo rm -f /etc/ssh/ssh_host_*
 ```
 
-**Passo 6.** Gere chaves novas. **Não pule este passo**, senão o servidor SSH não volta a funcionar:
+**Passo 7.** Gere chaves novas. **Não pule este passo**, senão o servidor SSH não volta a funcionar:
 
 ```bash
 sudo ssh-keygen -A
@@ -429,7 +439,7 @@ sudo ssh-keygen -A
 
 O `ssh-keygen -A` gera as chaves de host de todos os tipos que estiverem faltando.
 
-**Passo 7.** Reinicie a VM:
+**Passo 8.** Reinicie a VM:
 
 ```bash
 sudo reboot
